@@ -1,6 +1,6 @@
 {
   # FIXME: uncomment the next line if you want to reference your GitHub/GitLab access tokens and other secrets
-  # secrets,
+  secrets,
   username,
   hostname,
   pkgs,
@@ -8,10 +8,11 @@
   ...
 }: {
   # FIXME: change to your tz! look it up with "timedatectl list-timezones"
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/New_York";
 
   networking.hostName = "${hostname}";
 
+  programs.nix-ld.enable = true;
   # FIXME: change your shell here if you don't want fish
   programs.fish.enable = true;
   environment.pathsToLink = ["/share/fish"];
@@ -22,7 +23,10 @@
   security.sudo.wheelNeedsPassword = false;
 
   # FIXME: uncomment the next line to enable SSH
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    ports = [ 2022 ];
+  };
 
   users.users.${username} = {
     isNormalUser = true;
@@ -31,14 +35,15 @@
     extraGroups = [
       "wheel"
       # FIXME: uncomment the next line if you want to run docker without sudo
-      # "docker"
+      "docker"
     ];
     # FIXME: add your own hashed password
-    # hashedPassword = "";
+    hashedPassword = "$6$dipzwahufClyvWCp$0vtknTTEAeskE.RGDzXnOHjDL0RxGkunM0hEovQID/ggGoucteVRThijN43OUXCSUhUrj2v5DPK7OM4RGWc90/";
     # FIXME: add your own ssh public key
-    # openssh.authorizedKeys.keys = [
-    #   "ssh-rsa ..."
-    # ];
+    openssh.authorizedKeys.keys = [
+      "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAB+9B3YvhEW/tKjuUITbrKF0/ny5IlJK7P3uNydz/+LKJCy1iMGGouqx1VDESsgz5kuwBvZEYQe+DJ1Y71FStCiUwCsqFyNytAbyso+mNv8rGUzKNNijYKe0FOFDQa2MX557qGpgScJ1COzkJFT0hFLsSf4I7vvmpLLSk/LvfYO1Y+BFA== root@jrogers-linux"
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGV1JMc1cv8KrXdgXWrz5CwoKvNqZbVr7Mf4xLv7QJBcDiGeAOapgVPGHQ98Yzde+Yytrg65D66gPN8f/CVm+1nIsiLl4EEyzJ4WOQaDoiaNMfsfwpnZs5c5k15wwVMJyx/rLp6Q8ZZUl0drQ3m9BfKLHi+Y6DPNkmif9AE1GgXH0J+bYcWCjWhy67URcDQl8i6cmBYjnvbmpsbDEw+/chQ5LFutksIE9wZSyWRIHL5gmNQMJ/lP/iafRzWo/RuqJHdQio39qLzl2/r1shBU7T5zG/PBGltrpE1EVOsP42EdldGkdbgBHOu5nMKB4orc0dTEf24cA+tj2DwFOgVmHWKMUO0YxSLJzoBJoc8im+ka0JhNpykPeoEjblrUtxAkWxVl8Z1Iaa1Uolx9+PeG7ZXAzRoXHa+deW6sYxZWMa52DLR/VZCA2JwVdHO0ZP4P4OLQlmVsw9Zjw2M9u68++3VIiAf0oV/IY81Fbg4527fvtRtdkQMVKcNmSBcQAANiPpBhL7RJ5gVz6e1P382+cV2c6ILe0pP8+MSs9/WLEGl6z9ftdJxyEl4I279+zFLAUsqmbcn47780c0xPGJU8NKY76H93jKt00wNqdFLmlWPLvAOXuURkjJIadwDRM7LrCzrxrGSoFRebiU9LNV4jsiq8PP0VaqTPyETpMQYUpd9w== jon@l33tbuntu"
+    ];
   };
 
   home-manager.users.${username} = {
@@ -47,7 +52,7 @@
     ];
   };
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "24.11";
 
   wsl = {
     enable = true;
@@ -58,7 +63,7 @@
     startMenuLaunchers = true;
 
     # Enable integration with Docker Desktop (needs to be installed)
-    docker-desktop.enable = false;
+    docker-desktop.enable = true;
   };
 
   virtualisation.docker = {
@@ -89,10 +94,10 @@
     settings = {
       trusted-users = [username];
       # FIXME: use your access tokens from secrets.json here to be able to clone private repos on GitHub and GitLab
-      # access-tokens = [
-      #   "github.com=${secrets.github_token}"
-      #   "gitlab.com=OAuth2:${secrets.gitlab_token}"
-      # ];
+      access-tokens = [
+        "github.com=${secrets.github_token}"
+        "gitlab.com=OAuth2:${secrets.gitlab_token}"
+      ];
 
       accept-flake-config = true;
       auto-optimise-store = true;
