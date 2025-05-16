@@ -26,7 +26,6 @@
     procs
     ripgrep
     sd
-    tmux
     tree
     unzip
     vim
@@ -103,6 +102,11 @@ in {
       # pkgs.unstable.some-other-package
       pkgs.nvchad
     ];
+  
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+  };
 
   programs = {
     home-manager.enable = true;
@@ -151,69 +155,69 @@ in {
     lsd = {
       enable = true;
       enableAliases = true;
-      colors = {
-        user = "#cba6f7";
-        group = "#b4befe";
-        permission = {
-          read = "#a6e3a1";
-          write = "#f9e2af";
-          exec = "#eba0ac";
-          exec-sticky = "#cba6f7";
-          no-access = "#a6adc8";
-          octal = "#94e2d5";
-          acl = "#94e2d5";
-          context = "#89dceb";
-        };
-        date = {
-          hour-old = "#94e2d5";
-          day-old = "#89dceb";
-          older = "#74c7ec";
-        };
-        size = {
-          none = "#a6adc8";
-          small = "#a6e3a1";
-          medium = "#f9e2af";
-          large = "#fab387";
-        };
-        inode = {
-          valid = "#f5c2e7";
-          invalid = "#a6adc8";
-        };
-        links = {
-          valid = "#f5c2e7";
-          invalid = "#a6adc8";
-        };
-        tree-edge = "#bac2de";
-        git-status = {
-          default = "#cdd6f4";
-          unmodified = "#a6adc8";
-          ignored = "#a6adc8";
-          new-in-index = "#a6e3a1";
-          new-in-workdir = "#a6e3a1";
-          typechange = "#f9e2af";
-          deleted = "#f38ba8";
-          renamed = "#a6e3a1";
-          modified = "#f9e2af";
-          conflicted = "#f38ba8";
-        };
-      };
+      # colors = {
+      #   user = "#cba6f7";
+      #   group = "#b4befe";
+      #   permission = {
+      #     read = "#a6e3a1";
+      #     write = "#f9e2af";
+      #     exec = "#eba0ac";
+      #     exec-sticky = "#cba6f7";
+      #     no-access = "#a6adc8";
+      #     octal = "#94e2d5";
+      #     acl = "#94e2d5";
+      #     context = "#89dceb";
+      #   };
+      #   date = {
+      #     hour-old = "#94e2d5";
+      #     day-old = "#89dceb";
+      #     older = "#74c7ec";
+      #   };
+      #   size = {
+      #     none = "#a6adc8";
+      #     small = "#a6e3a1";
+      #     medium = "#f9e2af";
+      #     large = "#fab387";
+      #   };
+      #   inode = {
+      #     valid = "#f5c2e7";
+      #     invalid = "#a6adc8";
+      #   };
+      #   links = {
+      #     valid = "#f5c2e7";
+      #     invalid = "#a6adc8";
+      #   };
+      #   tree-edge = "#bac2de";
+      #   git-status = {
+      #     default = "#cdd6f4";
+      #     unmodified = "#a6adc8";
+      #     ignored = "#a6adc8";
+      #     new-in-index = "#a6e3a1";
+      #     new-in-workdir = "#a6e3a1";
+      #     typechange = "#f9e2af";
+      #     deleted = "#f38ba8";
+      #     renamed = "#a6e3a1";
+      #     modified = "#f9e2af";
+      #     conflicted = "#f38ba8";
+      #   };
+      # };
     };
     bat = {
       enable = true;
-      config = {
-        theme = "catppuccin";
-      };
-      themes = {
-        "catppuccin" = {
-          src = pkgs.fetchFromGitHub {
-            owner = "catppuccin";
-            repo = "bat";
-            rev = "699f60fc8ec434574ca7451b444b880430319941";
-            sha256 = "";
-          };
-          file = "Catppuccin Mocha.tmTheme";
-        };
-      };
+      # config = {
+      #   theme = "catppuccin";
+      # };
+      # themes = {
+      #   "catppuccin" = {
+      #     src = pkgs.fetchFromGitHub {
+      #       owner = "catppuccin";
+      #       repo = "bat";
+      #       rev = "699f60fc8ec434574ca7451b444b880430319941";
+      #       sha256 = "sha256-6fWoCH90IGumAMc4buLRWL0N61op+AuMNN9CAR9/OdI=";
+      #     };
+      #     file = "themes/Catppuccin Mocha.tmTheme";
+      #   };
+      # };
     };
     zoxide = {
       enable = true;
@@ -229,6 +233,10 @@ in {
       nix-direnv = {
         enable = true;
       };
+    };
+
+    tmux = {
+      enable = true;
     };
 
     git = {
@@ -346,15 +354,15 @@ in {
           inherit (pkgs.fishPlugins.sponge) src;
           name = "sponge";
         }
-        {
-          name = "fish-catppuccin";
-          src = pkgs.fetchFromGitHub {
-            owner = "catppuccin";
-            repo = "fish";
-            rev = "6a85af2ff722ad0f9fbc8424ea0a5c454661dfed";
-            sha256 = "";
-          }
-        }
+        # {
+        #   name = "fish-catppuccin";
+        #   src = pkgs.fetchFromGitHub {
+        #     owner = "catppuccin";
+        #     repo = "fish";
+        #     rev = "6a85af2ff722ad0f9fbc8424ea0a5c454661dfed";
+        #     sha256 = "sha256-Oc0emnIUI4LV7QJLs4B2/FQtCFewRFVp7EDv8GawFsA=";
+        #   };
+        # }
       ];
     };
   };

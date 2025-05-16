@@ -33,6 +33,7 @@
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin.url = "github:catppuccin/nix";
     # jeezyvim = {
     #   url = "github:LGUG2Z/JeezyVim";
     # };
@@ -95,6 +96,7 @@
           modules =
             [
               (configurationDefaults specialArgs)
+              catppuccin.nixosModules.catppuccin
               home-manager.nixosModules.home-manager
             ]
             ++ modules;
@@ -109,6 +111,9 @@
           nixos-wsl.nixosModules.wsl
           ./wsl.nix
         ];
+        args = {
+          inherit catppuccin;
+        };
       };
     };
 }

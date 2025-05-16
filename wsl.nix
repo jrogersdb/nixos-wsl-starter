@@ -5,6 +5,7 @@
   hostname,
   pkgs,
   inputs,
+  catppuccin,
   ...
 }: {
   # FIXME: change to your tz! look it up with "timedatectl list-timezones"
@@ -49,6 +50,7 @@
   home-manager.users.${username} = {
     imports = [
       ./home.nix
+      catppuccin.homeModules.catppuccin
     ];
   };
 
