@@ -8,7 +8,7 @@
 }: let
   unstable-packages = with pkgs.unstable; [
     # FIXME: select your core binaries that you always want on the bleeding-edge
-    bat
+    # bat
     bottom
     coreutils
     curl
@@ -39,7 +39,9 @@
 
     # FIXME: you can add plugins, change keymaps etc using (jeezyvim.nixvimExtend {})
     # https://github.com/LGUG2Z/JeezyVim#extending
-    jeezyvim
+    # jeezyvim
+    # nix stuff
+    nurl
 
     # key tools
     dig
@@ -48,6 +50,7 @@
     openssl
 
     # core languages
+    go
     rustup
 
     # rust stuff
@@ -98,6 +101,7 @@ in {
     [
       # pkgs.some-package
       # pkgs.unstable.some-other-package
+      pkgs.nvchad
     ];
 
   programs = {
@@ -123,17 +127,109 @@ in {
     };
 
     # FIXME: disable whatever you don't want
-    fzf.enable = true;
-    fzf.enableFishIntegration = true;
-    lsd.enable = true;
-    lsd.enableAliases = true;
-    zoxide.enable = true;
-    zoxide.enableFishIntegration = true;
-    zoxide.options = ["--cmd cd"];
-    broot.enable = true;
-    broot.enableFishIntegration = true;
-    direnv.enable = true;
-    direnv.nix-direnv.enable = true;
+    fzf = {
+      enable = true;
+      enableFishIntegration = true;
+      colors = {
+        "bg+" = "#313244";
+        "bg" = "#1E1E2E";
+        "spinner" = "#F5E0DC";
+        "hl" = "#F38BA8";
+        "fg" = "#CDD6F4";
+        "header" = "#F38BA8";
+        "info" = "#CBA6F7";
+        "pointer" = "#F5E0DC";
+        "marker" = "#B4BEFE";
+        "fg+" = "#CDD6F4";
+        "prompt" = "#CBA6F7";
+        "hl+" = "#F38BA8";
+        "selected-bg" = "#45475A";
+        "border" = "#313244";
+        "label" = "#CDD6F4";
+      };
+    };
+    lsd = {
+      enable = true;
+      enableAliases = true;
+      colors = {
+        user = "#cba6f7";
+        group = "#b4befe";
+        permission = {
+          read = "#a6e3a1";
+          write = "#f9e2af";
+          exec = "#eba0ac";
+          exec-sticky = "#cba6f7";
+          no-access = "#a6adc8";
+          octal = "#94e2d5";
+          acl = "#94e2d5";
+          context = "#89dceb";
+        };
+        date = {
+          hour-old = "#94e2d5";
+          day-old = "#89dceb";
+          older = "#74c7ec";
+        };
+        size = {
+          none = "#a6adc8";
+          small = "#a6e3a1";
+          medium = "#f9e2af";
+          large = "#fab387";
+        };
+        inode = {
+          valid = "#f5c2e7";
+          invalid = "#a6adc8";
+        };
+        links = {
+          valid = "#f5c2e7";
+          invalid = "#a6adc8";
+        };
+        tree-edge = "#bac2de";
+        git-status = {
+          default = "#cdd6f4";
+          unmodified = "#a6adc8";
+          ignored = "#a6adc8";
+          new-in-index = "#a6e3a1";
+          new-in-workdir = "#a6e3a1";
+          typechange = "#f9e2af";
+          deleted = "#f38ba8";
+          renamed = "#a6e3a1";
+          modified = "#f9e2af";
+          conflicted = "#f38ba8";
+        };
+      };
+    };
+    bat = {
+      enable = true;
+      config = {
+        theme = "catppuccin";
+      };
+      themes = {
+        "catppuccin" = {
+          src = pkgs.fetchFromGitHub {
+            owner = "catppuccin";
+            repo = "bat";
+            rev = "699f60fc8ec434574ca7451b444b880430319941";
+            sha256 = "";
+          };
+          file = "Catppuccin Mocha.tmTheme";
+        };
+      };
+    };
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+      options = ["--cmd cd"];
+    };
+    broot = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+    direnv = {
+      enable = true;
+      nix-direnv = {
+        enable = true;
+      };
+    };
 
     git = {
       enable = true;
@@ -249,6 +345,15 @@ in {
         {
           inherit (pkgs.fishPlugins.sponge) src;
           name = "sponge";
+        }
+        {
+          name = "fish-catppuccin";
+          src = pkgs.fetchFromGitHub {
+            owner = "catppuccin";
+            repo = "fish";
+            rev = "6a85af2ff722ad0f9fbc8424ea0a5c454661dfed";
+            sha256 = "";
+          }
         }
       ];
     };
