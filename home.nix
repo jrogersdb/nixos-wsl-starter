@@ -23,6 +23,8 @@
     jq
     killall
     mosh
+    mtr
+    nmap
     procs
     ripgrep
     sd
@@ -50,6 +52,8 @@
 
     # core languages
     go
+    nodejs
+    python3
     rustup
 
     # rust stuff
@@ -64,6 +68,7 @@
     tree-sitter
 
     # language servers
+    gopls
     nodePackages.vscode-langservers-extracted # html, css, json, eslint
     nodePackages.yaml-language-server
     nil # nix
@@ -71,6 +76,7 @@
     # formatters and linters
     alejandra # nix
     deadnix # nix
+    golangci-lint
     nodePackages.prettier
     shellcheck
     shfmt
@@ -79,6 +85,7 @@
 in {
   imports = [
     nix-index-database.hmModules.nix-index
+    inputs.nvchad4nix.homeManagerModule
   ];
 
   home.stateVersion = "24.11";
@@ -100,12 +107,15 @@ in {
     [
       # pkgs.some-package
       # pkgs.unstable.some-other-package
-      pkgs.nvchad
     ];
   
   catppuccin = {
     enable = true;
     flavor = "mocha";
+    helix = {
+      enable = true;
+      useItalics = true;
+    };
   };
 
   programs = {
@@ -114,13 +124,41 @@ in {
     nix-index.enableFishIntegration = true;
     nix-index-database.comma.enable = true;
 
+    nvchad = {
+      enable = true;
+    };
+
+    mtr = {
+      enable = true;
+    };
+
+    atuin = {
+      enable = true;
+    };
+
+    btop = {
+      enable = true;
+    };
+
+    bottom = {
+      enable = true;
+    };
+
+    zellij = {
+      enable = true;
+    };
+
+    qutebrowser = {
+      enable = true;
+    };
+
     # FIXME: disable this if you don't want to use the starship prompt
     starship.enable = true;
     starship.settings = {
       aws.disabled = true;
       gcloud.disabled = true;
       kubernetes.disabled = false;
-      git_branch.style = "242";
+      # git_branch.style = "242";
       directory.style = "blue";
       directory.truncate_to_repo = false;
       directory.truncation_length = 8;
@@ -152,82 +190,27 @@ in {
         "label" = "#CDD6F4";
       };
     };
+    
     lsd = {
       enable = true;
       enableAliases = true;
-      # colors = {
-      #   user = "#cba6f7";
-      #   group = "#b4befe";
-      #   permission = {
-      #     read = "#a6e3a1";
-      #     write = "#f9e2af";
-      #     exec = "#eba0ac";
-      #     exec-sticky = "#cba6f7";
-      #     no-access = "#a6adc8";
-      #     octal = "#94e2d5";
-      #     acl = "#94e2d5";
-      #     context = "#89dceb";
-      #   };
-      #   date = {
-      #     hour-old = "#94e2d5";
-      #     day-old = "#89dceb";
-      #     older = "#74c7ec";
-      #   };
-      #   size = {
-      #     none = "#a6adc8";
-      #     small = "#a6e3a1";
-      #     medium = "#f9e2af";
-      #     large = "#fab387";
-      #   };
-      #   inode = {
-      #     valid = "#f5c2e7";
-      #     invalid = "#a6adc8";
-      #   };
-      #   links = {
-      #     valid = "#f5c2e7";
-      #     invalid = "#a6adc8";
-      #   };
-      #   tree-edge = "#bac2de";
-      #   git-status = {
-      #     default = "#cdd6f4";
-      #     unmodified = "#a6adc8";
-      #     ignored = "#a6adc8";
-      #     new-in-index = "#a6e3a1";
-      #     new-in-workdir = "#a6e3a1";
-      #     typechange = "#f9e2af";
-      #     deleted = "#f38ba8";
-      #     renamed = "#a6e3a1";
-      #     modified = "#f9e2af";
-      #     conflicted = "#f38ba8";
-      #   };
-      # };
     };
+
     bat = {
       enable = true;
-      # config = {
-      #   theme = "catppuccin";
-      # };
-      # themes = {
-      #   "catppuccin" = {
-      #     src = pkgs.fetchFromGitHub {
-      #       owner = "catppuccin";
-      #       repo = "bat";
-      #       rev = "699f60fc8ec434574ca7451b444b880430319941";
-      #       sha256 = "sha256-6fWoCH90IGumAMc4buLRWL0N61op+AuMNN9CAR9/OdI=";
-      #     };
-      #     file = "themes/Catppuccin Mocha.tmTheme";
-      #   };
-      # };
     };
+
     zoxide = {
       enable = true;
       enableFishIntegration = true;
       options = ["--cmd cd"];
     };
+
     broot = {
       enable = true;
       enableFishIntegration = true;
     };
+
     direnv = {
       enable = true;
       nix-direnv = {
@@ -271,6 +254,11 @@ in {
           colorMoved = "default";
         };
       };
+    };
+
+    carapace = {
+      enable = true;
+      enableFishIntegration = true;
     };
 
     # FIXME: This is my fish config - you can fiddle with it if you want
