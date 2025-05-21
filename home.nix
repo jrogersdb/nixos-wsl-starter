@@ -135,7 +135,7 @@ in {
         }
         M.nvdash = { load_on_startup = true }
         return M
-      ''
+      '';
     };
 
     # mtr = {
@@ -164,7 +164,7 @@ in {
 
     brave = {
       enable = true;
-    }
+    };
 
     # FIXME: disable this if you don't want to use the starship prompt
     starship.enable = true;
