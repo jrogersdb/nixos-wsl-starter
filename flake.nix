@@ -88,7 +88,10 @@
         args ? {},
         modules,
       }: let
-        specialArgs = argDefaults // {inherit hostname username;} // args;
+        specialArgs = argDefaults // {
+          inherit hostname username;
+          inherit (inputs) nix4nvchad;
+        } // args;
       in
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;

@@ -4,12 +4,13 @@
   pkgs,
   username,
   nix-index-database,
+  inputs,
   ...
 }: let
   unstable-packages = with pkgs.unstable; [
     # FIXME: select your core binaries that you always want on the bleeding-edge
     # bat
-    bottom
+    #bottom
     coreutils
     curl
     du-dust
@@ -85,7 +86,7 @@
 in {
   imports = [
     nix-index-database.hmModules.nix-index
-    inputs.nvchad4nix.homeManagerModule
+    inputs.nix4nvchad.homeManagerModule
   ];
 
   home.stateVersion = "24.11";
@@ -126,11 +127,20 @@ in {
 
     nvchad = {
       enable = true;
+      backup = false;
+      chadrcConfig = ''
+        local M = {}
+        M.base46 = {
+          theme = "catppuccin"
+        }
+        M.nvdash = { load_on_startup = true }
+        return M
+      ''
     };
 
-    mtr = {
-      enable = true;
-    };
+    # mtr = {
+    #   enable = true;
+    # };
 
     atuin = {
       enable = true;
@@ -152,6 +162,10 @@ in {
       enable = true;
     };
 
+    brave = {
+      enable = true;
+    }
+
     # FIXME: disable this if you don't want to use the starship prompt
     starship.enable = true;
     starship.settings = {
@@ -172,25 +186,25 @@ in {
     fzf = {
       enable = true;
       enableFishIntegration = true;
-      colors = {
-        "bg+" = "#313244";
-        "bg" = "#1E1E2E";
-        "spinner" = "#F5E0DC";
-        "hl" = "#F38BA8";
-        "fg" = "#CDD6F4";
-        "header" = "#F38BA8";
-        "info" = "#CBA6F7";
-        "pointer" = "#F5E0DC";
-        "marker" = "#B4BEFE";
-        "fg+" = "#CDD6F4";
-        "prompt" = "#CBA6F7";
-        "hl+" = "#F38BA8";
-        "selected-bg" = "#45475A";
-        "border" = "#313244";
-        "label" = "#CDD6F4";
-      };
+      # colors = {
+      #   "bg+" = "#313244";
+      #   "bg" = "#1E1E2E";
+      #   "spinner" = "#F5E0DC";
+      #   "hl" = "#F38BA8";
+      #   "fg" = "#CDD6F4";
+      #   "header" = "#F38BA8";
+      #   "info" = "#CBA6F7";
+      #   "pointer" = "#F5E0DC";
+      #   "marker" = "#B4BEFE";
+      #   "fg+" = "#CDD6F4";
+      #   "prompt" = "#CBA6F7";
+      #   "hl+" = "#F38BA8";
+      #   "selected-bg" = "#45475A";
+      #   "border" = "#313244";
+      #   "label" = "#CDD6F4";
+      # };
     };
-    
+
     lsd = {
       enable = true;
       enableAliases = true;

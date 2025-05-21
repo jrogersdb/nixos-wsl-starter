@@ -52,6 +52,7 @@
       ./home.nix
       catppuccin.homeModules.catppuccin
     ];
+    _module.args = { inherit inputs; };  # Add this line
   };
 
   system.stateVersion = "24.11";
