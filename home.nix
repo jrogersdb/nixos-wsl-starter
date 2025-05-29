@@ -19,7 +19,6 @@
     fx
     git
     git-crypt
-    helix
     htop
     jq
     killall
@@ -145,6 +144,7 @@ in {
 
     atuin = {
       enable = true;
+      enableFishIntegration = true;
     };
 
     btop = {
@@ -155,8 +155,14 @@ in {
       enable = true;
     };
 
+    helix = {
+      enable = true;
+      package = pkgs.unstable.helix;
+    };
+
     zellij = {
       enable = true;
+      enableFishIntegration = true;
     };
 
     qutebrowser = {
@@ -209,6 +215,7 @@ in {
     lsd = {
       enable = true;
       enableAliases = true;
+      enableFishIntegration = true;
     };
 
     bat = {
@@ -231,6 +238,34 @@ in {
       nix-direnv = {
         enable = true;
       };
+    };
+
+    navi = {
+      enable = true;
+      enableFishIntegration = true;
+      package = pkgs.unstable.navi;
+    };
+
+    yazi = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    mise = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    mods = {
+      enable = true;
+      enableFishIntegration = true;
+      package = pkgs.unstable.mods;
+    };
+
+    pay-respects = {
+      enable = true;
+      enableFishIntegration = true;
+      package = pkgs.unstable.pay-respects;
     };
 
     tmux = {
@@ -279,6 +314,7 @@ in {
     # FIXME: This is my fish config - you can fiddle with it if you want
     fish = {
       enable = true;
+      package = pkgs.unstable.fish;
       # FIXME: run 'scoop install win32yank' on Windows, then add this line with your Windows username to the bottom of interactiveShellInit
       # fish_add_path --append /mnt/c/Users/<Your Windows Username>/scoop/apps/win32yank/0.1.1
       # 
@@ -356,6 +392,15 @@ in {
         {
           inherit (pkgs.fishPlugins.sponge) src;
           name = "sponge";
+        }
+        {
+          name = "fish-completions";
+          src = pkgs.fetchFromGitHub {
+            owner = "kidonng";
+            repo = "completions.fish";
+            rev = "a473ef6d03d8b8c11228c701f11600cd13a018b7";
+            hash = "sha256-iDBbxX4SOX08xb121cbJqUwdJVIIgbVH38LywRCPAYg=";
+          };
         }
       ];
     };
