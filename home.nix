@@ -88,7 +88,7 @@ in {
     inputs.nix4nvchad.homeManagerModule
   ];
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   home = {
     username = "${username}";
@@ -173,6 +173,10 @@ in {
       enable = true;
     };
 
+    ghostty = {
+      enable = true;
+    };
+
     # FIXME: disable this if you don't want to use the starship prompt
     starship.enable = true;
     starship.settings = {
@@ -214,7 +218,6 @@ in {
 
     lsd = {
       enable = true;
-      enableAliases = true;
       enableFishIntegration = true;
     };
 
