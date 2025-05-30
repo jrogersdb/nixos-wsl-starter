@@ -119,10 +119,15 @@ in {
   };
 
   programs = {
-    home-manager.enable = true;
-    nix-index.enable = true;
-    nix-index.enableFishIntegration = true;
-    nix-index-database.comma.enable = true;
+    home-manager = {
+      enable = true;
+    };
+
+    nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+      database.comma.enable = true;
+    };
 
     nvchad = {
       enable = true;
@@ -138,33 +143,6 @@ in {
       '';
     };
 
-    # mtr = {
-    #   enable = true;
-    # };
-
-    atuin = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-
-    btop = {
-      enable = true;
-    };
-
-    bottom = {
-      enable = true;
-    };
-
-    helix = {
-      enable = true;
-      package = pkgs.unstable.helix;
-    };
-
-    zellij = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-
     qutebrowser = {
       enable = true;
     };
@@ -177,7 +155,22 @@ in {
       enable = true;
     };
 
-    # FIXME: disable this if you don't want to use the starship prompt
+    kitty = {
+      enable = true;
+    };
+
+    waveterm = {
+      enable = true;
+    };
+
+    zathura = {
+      enable = true;
+    };
+
+    zed-editor = {
+      enable = true;
+    };
+
     starship.enable = true;
     starship.settings = {
       aws.disabled = true;
@@ -193,7 +186,6 @@ in {
       hostname.style = "bold green";
     };
 
-    # FIXME: disable whatever you don't want
     fzf = {
       enable = true;
       enableFishIntegration = true;
@@ -217,6 +209,29 @@ in {
     };
 
     lsd = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    atuin = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    btop = {
+      enable = true;
+    };
+
+    bottom = {
+      enable = true;
+    };
+
+    helix = {
+      enable = true;
+      package = pkgs.unstable.helix;
+    };
+
+    zellij = {
       enable = true;
       enableFishIntegration = true;
     };
@@ -275,6 +290,19 @@ in {
       enable = true;
     };
 
+    gh = {
+      enable = true;
+      gitCredentialHelper = { enable = true; };
+    };
+
+    lazygit = {
+      enable = true;
+    };
+
+    gitui = {
+      enable = true;
+    };
+
     git = {
       enable = true;
       package = pkgs.unstable.git;
@@ -312,6 +340,10 @@ in {
     carapace = {
       enable = true;
       enableFishIntegration = true;
+    };
+
+    nushell = {
+      enable = true;
     };
 
     # FIXME: This is my fish config - you can fiddle with it if you want
