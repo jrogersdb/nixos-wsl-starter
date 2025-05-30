@@ -126,8 +126,9 @@ in {
     nix-index = {
       enable = true;
       enableFishIntegration = true;
-      database.comma.enable = true;
     };
+
+    nix-index-database.comma.enable = true;
 
     nvchad = {
       enable = true;
