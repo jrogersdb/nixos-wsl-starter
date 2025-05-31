@@ -49,6 +49,7 @@
     gh # for bootstrapping
     just
     openssl
+    pinentry-tty
 
     # core languages
     go
@@ -115,6 +116,17 @@ in {
     helix = {
       enable = true;
       useItalics = true;
+    };
+  };
+
+  services = {
+    gpg-agent = {
+      enable = true;
+      enableFishIntegration = true;
+      pinentry = {
+        program = "pinentry-tty";
+        package = pkgs.pinentry-tty;
+      };
     };
   };
 
@@ -270,6 +282,11 @@ in {
       enableFishIntegration = true;
     };
 
+    television = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     mise = {
       enable = true;
       enableFishIntegration = true;
@@ -301,6 +318,10 @@ in {
     };
 
     gitui = {
+      enable = true;
+    };
+
+    gpg = {
       enable = true;
     };
 
