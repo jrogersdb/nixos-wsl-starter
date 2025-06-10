@@ -11,6 +11,7 @@
     # FIXME: select your core binaries that you always want on the bleeding-edge
     # bat
     #bottom
+    amazon-q-cli
     coreutils
     curl
     du-dust
@@ -50,6 +51,7 @@
     just
     openssl
     pinentry-tty
+    traceroute
 
     # core languages
     go
@@ -82,7 +84,12 @@
     shellcheck
     shfmt
     statix # nix
+
+    # fonts
+    monaspace
+    maple-mono.NF
   ];
+
 in {
   imports = [
     nix-index-database.hmModules.nix-index
@@ -185,19 +192,20 @@ in {
     };
 
     starship.enable = true;
-    starship.settings = {
-      aws.disabled = true;
-      gcloud.disabled = true;
-      kubernetes.disabled = false;
-      # git_branch.style = "242";
-      directory.style = "blue";
-      directory.truncate_to_repo = false;
-      directory.truncation_length = 8;
-      python.disabled = true;
-      ruby.disabled = true;
-      # hostname.ssh_only = false;
-      hostname.style = "bold green";
-    };
+    starship.settings = import ./starship.nix;
+    # starship.settings = {
+    #   aws.disabled = true;
+    #   gcloud.disabled = true;
+    #   kubernetes.disabled = false;
+    #   # git_branch.style = "242";
+    #   directory.style = "blue";
+    #   directory.truncate_to_repo = false;
+    #   directory.truncation_length = 8;
+    #   python.disabled = true;
+    #   ruby.disabled = true;
+    #   # hostname.ssh_only = false;
+    #   hostname.style = "bold green";
+    # };
 
     fzf = {
       enable = true;
