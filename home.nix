@@ -90,6 +90,8 @@
     maple-mono.NF
   ];
 
+  configs = import ./config { inherit pkgs; };
+
 in {
   imports = [
     nix-index-database.hmModules.nix-index
@@ -123,6 +125,9 @@ in {
     helix = {
       enable = true;
       useItalics = true;
+    };
+    starship = {
+      enable = false;
     };
   };
 
@@ -192,7 +197,7 @@ in {
     };
 
     starship.enable = true;
-    starship.settings = import ./starship.nix;
+    starship.settings = builtins.fromTOML (builtins.readFile "${configs.starship}/config/starship.toml");
     # starship.settings = {
     #   aws.disabled = true;
     #   gcloud.disabled = true;
@@ -255,6 +260,7 @@ in {
     zellij = {
       enable = true;
       enableFishIntegration = true;
+      exitShellOnExit = true;
     };
 
     bat = {
